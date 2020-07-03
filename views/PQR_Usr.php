@@ -14,10 +14,8 @@
                         <th>Tipo</th>
                         <th>Asunto</th>
                         <th>Estado</th>
-                        <th>Fecha Solicitada</th>
+                        <th>Fecha de Creacion</th>
                         <th>Fecha Limite</th>                        
-                        <th>Accion</th>
-                        <th>Accion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,8 +32,6 @@
                     <td><?php echo $pqr->Estado; ?></td>
                     <td><?php echo $pqr->FechaSol; ?></td>
                     <td><?php echo $pqr->FechaLim; ?></td>
-                    <td><a href="<?php echo constant('URL') . 'Pqr_con/Editar/' . $pqr->id; ?>">Actualizar</a></td>
-                    <td><a href="<?php echo constant('URL') . 'Pqr_con/Eliminar/' . $pqr->id; ?>">Eliminar</a></td>
                 </tr>
         <?php } ?>
                 </tbody>
@@ -46,8 +42,7 @@
                         <th>Fecha Solicitada</th>
                         <th>Fecha Limite</th>
                         <th>Asunto</th>
-                        <th>Accion</th>
-                        <th>Accion</th>
+
                     </tr>
                 </tfoot>
             </table>  
@@ -56,7 +51,6 @@
        </div> 
        <div class="row">
 		   <div class="col-md-12 login-from-row">
-           <h1></h1>
            <a class="btn  btn-primary btn-lg" href="<?php echo constant('URL').'Pqr_con/Registro'?>">Agregar P.Q.R</a>
            <a class="btn  btn-danger btn-lg" href="<?php echo constant('URL').'User/Logout/'?>">Cerrar Sesion</a>
 			  

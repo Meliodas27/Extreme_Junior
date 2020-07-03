@@ -36,6 +36,14 @@ class User extends Controller
     }
 
     function Login(){
+      
+
+        if(!isset($_POST['correot'])){
+            $this->view->mensaje = "Página No encontrada";
+            $this->view->render('Login');
+        }else{
+
+        
         $correo = $_POST['correot'];
         $pass = $_POST['passt'];
         $usuario = $this->model->buscar_usr(['correo' => $correo, 'pass' => $pass]);
@@ -48,14 +56,28 @@ class User extends Controller
             $Pqr=$this->model->getPqr($usuario->id,$usuario->rol);
             $this->view->mensaje="Bienvenido";
             $this->view->Pqr=$Pqr;
+            if($_SESSION["rol_usuario"]>1){
+                $this->view->render('PQR_Usr');
 
-            $this->view->render('PQR');
+            }else{
+                $this->view->render('PQR');
+
+            }
 
         }else{
             $this->view->mensaje = "El usuario no se encuentra registrado";
             $this->view->render('Login');
 
         }
+    }
+   
+    }
+
+    function logout(){
+        session_start();
+        session_unset();
+        $this->view->mensaje = "Vuelva Pronto";
+        $this->view->render('Login');
     }
 
     

@@ -48,14 +48,80 @@ class Pqr_con extends Controller{
             $Pqr=$this->model->getPqr($_SESSION["id_usuario"],
             $_SESSION["rol_usuario"] );
             $this->view->Pqr=$Pqr;
-            $this->view->mensaje = $fechaact;
-            $this->view->render('PQR');
+            if($_SESSION["rol_usuario"]>1){
+                $this->view->render('PQR_Usr');
+
+            }else{
+                $this->view->render('PQR');
+
+            }
+            
         }else{
             $this->view->mensaje = "Error  al registrar la peticion";
             $this->view->render('Register_Pqr');
         }
 
     }
+    function Eliminar($id=null){
+
+        $this->loadModel('Pqr');
+        session_start();
+        if($this->model->eliminar_pqr($id[0])){
+            $Pqr=$this->model->getPqr($_SESSION["id_usuario"],
+            $_SESSION["rol_usuario"] );
+            $this->view->Pqr=$Pqr;
+            if($_SESSION["rol_usuario"]>1){
+                
+                $this->view->render('PQR_Usr');
+
+            }else{
+                $this->view->render('PQR');
+
+            }
+        }else{
+            $mensaje = "No se pudo eliminar la PQR";
+        }
+    }
+
+    function Editar($id=null){
+
+        $this->loadModel('Pqr');
+        session_start();
+        $Pqr = $this->model->Buscar_Pqr($id[0]);
+       
+          $this->view->Pqr=$Pqr;
+             $this->view->render('Update_Pqr');
+
+          
+        }
+
+        function Actualizar(){
+            session_start();
+
+            $this->loadModel('Pqr');
+            $asunto = $_POST['asuntot'];
+            $estado = $_POST['estadot'];
+            $id=$_POST['pid'];
+            if($this->model->actualizar(['estado' => $estado,
+            'asunto' => $asunto,'id'=>$id])){
+                $Pqr=$this->model->getPqr($_SESSION["id_usuario"],
+            $_SESSION["rol_usuario"] );
+                $this->view->Pqr=$Pqr;
+            if($_SESSION["rol_usuario"]>1){
+                
+                $this->view->render('PQR_Usr');
+
+            }else{
+                $this->view->render('PQR');
+
+            }
+            }else {
+                $mensaje = "No se pudo Actualizar la PQR";
+
+            }
+     
+            }
+    
     
 }
 
