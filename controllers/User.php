@@ -3,6 +3,7 @@ class User extends Controller
 {
     function __construct(){
         parent::__construct();
+        $this->view->mensaje = "";
         
     }
 
@@ -35,8 +36,26 @@ class User extends Controller
     }
 
     function Login(){
-        $correo = $_POST['correo'];
-        $pass = $_POST['pass'];
+        $correo = $_POST['correot'];
+        $pass = $_POST['passt'];
+        $usuario = $this->model->buscar_usr(['correo' => $correo, 'pass' => $pass]);
+
+        if($usuario->id>0){
+            session_start();
+            $_SESSION["id_usuario"] = $usuario->id;
+            $_SESSION["rol_usuario"] = $usuario->rol;
+            $this->loadModel('Pqr');
+            $Pqr=$this->model->getPqr($usuario->id,$usuario->rol);
+            $this->view->mensaje="Bienvenido";
+            $this->view->Pqr=$Pqr;
+
+            $this->view->render('PQR');
+
+        }else{
+            $this->view->mensaje = "El usuario no se encuentra registrado";
+            $this->view->render('Login');
+
+        }
     }
 
     
