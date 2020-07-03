@@ -14,14 +14,22 @@
 		</div>
 		<div class="row">
 		   <div class="col-md-12 login-from-row">
-		      <input name="user" id="user" type="text" placeholder="Usuario" required/>
+		      <input name="correot" id="correot" type="text" placeholder="Correo" required/>
 		   </div>
 		</div>
 		<div class="row">
 		   <div class="col-md-12 login-from-row">
-		      <input name="pass" id="pass" type="password" placeholder="Contraseña" required/>
+		      <input name="passt" id="passt" type="password" placeholder="Contraseña" required/>
 		   </div>
 		</div>
+
+		<div class="row">
+		   <div class="col-md-12 login-from-row">
+		   <label for="Name"><?php if (isset($this->mensaje)){ echo $this->mensaje;} ?></label>
+		   </div>
+		</div>
+
+		
 		<div class="row">
 		   <div class="col-md-12 login-from-row">
 		      <button class="btn btn-info">Entrar</button>
